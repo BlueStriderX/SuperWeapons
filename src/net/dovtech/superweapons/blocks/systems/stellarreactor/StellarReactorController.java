@@ -1,10 +1,13 @@
 package net.dovtech.superweapons.blocks.systems.stellarreactor;
 
+import net.dovtech.superweapons.systems.StellarReactorCoilGroup;
 import org.schema.game.common.data.element.ElementInformation;
+import java.util.ArrayList;
 
 public class StellarReactorController {
 
     private ElementInformation blockInfo;
+    private ArrayList<StellarReactorCoilGroup> coilGroups;
 
     public StellarReactorController() {
         blockInfo.setFullName("Stellar Reactor Controller");
@@ -24,4 +27,7 @@ public class StellarReactorController {
         return blockInfo;
     }
 
+    public void addCoilGroup(StellarReactorCoilGroup coilGroup) {
+        coilGroups.add(coilGroup);
+    }
 }

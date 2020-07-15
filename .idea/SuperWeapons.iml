@@ -10,15 +10,6 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../Programming/Java/StarLoader/starloader/out/artifacts/starloader_jar/starloader.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
           <root url="jar://$MODULE_DIR$/../../Programming/Java/StarLoader/starloader/out/artifacts/starloader_jar/StarMade.jar!/" />
         </CLASSES>
         <JAVADOC />
@@ -38,6 +29,24 @@
       <library>
         <CLASSES>
           <root url="jar://$MODULE_DIR$/../../Programming/Java/StarLoader/starloader/out/artifacts/starloader_jar/fastutil-6.5.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../Programming/Java/StarLoader/starloader/out/artifacts/starloader_jar/vecmath.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../Programming/Java/StarLoader/starloader/out/artifacts/starloader_jar/starloader.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
