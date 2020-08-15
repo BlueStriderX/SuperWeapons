@@ -1,11 +1,10 @@
 package net.dovtech.superweapons.blocks.systems;
 
-import api.config.BlockConfig;
 import org.schema.game.common.data.element.ElementInformation;
 
 public class NeutroniumCapacitor {
 
-    public static ElementInformation blockInfo = BlockConfig.newElement("Neutronium Capacitor");
+    public static ElementInformation blockInfo;
 
     public NeutroniumCapacitor() {
         blockInfo.setFullName("Neutronium Capacitor");

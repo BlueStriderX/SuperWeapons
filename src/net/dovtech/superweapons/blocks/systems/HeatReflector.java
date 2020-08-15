@@ -1,11 +1,11 @@
 package net.dovtech.superweapons.blocks.systems;
 
-import api.config.BlockConfig;
+import api.element.block.Blocks;
 import org.schema.game.common.data.element.ElementInformation;
 
 public class HeatReflector {
 
-    public static ElementInformation blockInfo = BlockConfig.newElement("Heat Reflector");
+    public static ElementInformation blockInfo;
 
     public HeatReflector() {
         blockInfo.setFullName("Heat Reflector");
@@ -21,5 +21,6 @@ public class HeatReflector {
         blockInfo.setDoor(false);
         blockInfo.systemBlock = true;
         blockInfo.controlledBy.add(StellarLifterController.blockInfo.id);
+        blockInfo.controlling.add(Blocks.ACTIVATION_MODULE.getId());
     }
 }

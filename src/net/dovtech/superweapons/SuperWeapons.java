@@ -5,11 +5,9 @@ import api.config.BlockConfig;
 import api.element.block.Blocks;
 import api.mod.StarMod;
 import api.mod.config.FileConfiguration;
-import net.dovtech.superweapons.blocks.systems.HeatReflector;
-import net.dovtech.superweapons.blocks.systems.NeutroniumCapacitor;
-import net.dovtech.superweapons.blocks.systems.NeutroniumSiphonModule;
-import net.dovtech.superweapons.blocks.systems.StellarLifterController;
+import net.dovtech.superweapons.blocks.systems.*;
 import net.dovtech.superweapons.systems.neutroniumcapacitor.NeutroniumCapacitorUnit;
+import org.schema.game.common.data.element.ElementInformation;
 import org.schema.game.common.data.element.FactoryResource;
 
 public class SuperWeapons extends StarMod {
@@ -59,11 +57,19 @@ public class SuperWeapons extends StarMod {
         5 = ADVANCED FACTORY
          */
 
+        //Create Blocks
+        StellarLifterController.blockInfo = config.newElement("Stellar Lifter Controller");
+        NeutroniumSiphonController.blockInfo = config.newElement("Neutronium Siphon Controller");
+        NeutroniumSiphonModule.blockInfo = config.newElement("Neutronium Siphon Module");
+        NeutroniumCapacitor.blockInfo = config.newElement("Neutronium Capacitor");
+        HeatReflector.blockInfo = config.newElement("Heat Reflector");
+
         //Initialize Blocks
-        StellarLifterController stellarLifterController = new StellarLifterController();
-        NeutroniumSiphonModule neutroniumSiphonModule = new NeutroniumSiphonModule();
-        NeutroniumCapacitorUnit neutroniumCapacitorUnit = new NeutroniumCapacitorUnit();
-        HeatReflector heatReflector = new HeatReflector();
+        new StellarLifterController();
+        new NeutroniumSiphonController();
+        new NeutroniumSiphonModule();
+        new NeutroniumCapacitor();
+        new HeatReflector();
 
         //Add Recipes
         FactoryResource[] stellarLifterControllerRecipe = {
@@ -73,6 +79,13 @@ public class SuperWeapons extends StarMod {
                 new FactoryResource(300, Blocks.SALVAGE_COMPUTER.getId())
         };
         BlockConfig.addRecipe(StellarLifterController.blockInfo, 5, 50, stellarLifterControllerRecipe);
+        FactoryResource[] neutroniumSiphonController = {
+                new FactoryResource(100, Blocks.REACTOR_STABILIZER.getId()),
+                new FactoryResource(50, Blocks.SALVAGE_COMPUTER.getId()),
+                new FactoryResource(50, Blocks.POWER_SUPPLY_COMPUTER.getId()),
+                new FactoryResource(30, Blocks.THRENS_INGOT.getId())
+        };
+        BlockConfig.addRecipe(NeutroniumSiphonController.blockInfo, 5, 15, neutroniumSiphonController);
         FactoryResource[] neutroniumSiphonRecipe = {
                 new FactoryResource(10, Blocks.REACTOR_STABILIZER.getId()),
                 new FactoryResource(30, Blocks.SALVAGE_MODULE.getId()),
@@ -96,6 +109,7 @@ public class SuperWeapons extends StarMod {
 
         //Register Blocks
         config.add(StellarLifterController.blockInfo);
+        config.add(NeutroniumSiphonController.blockInfo);
         config.add(NeutroniumSiphonModule.blockInfo);
         config.add(NeutroniumCapacitor.blockInfo);
         config.add(HeatReflector.blockInfo);

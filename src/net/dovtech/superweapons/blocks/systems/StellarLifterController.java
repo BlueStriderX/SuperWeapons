@@ -1,11 +1,11 @@
 package net.dovtech.superweapons.blocks.systems;
 
-import api.config.BlockConfig;
+import api.element.block.Blocks;
 import org.schema.game.common.data.element.ElementInformation;
 
 public class StellarLifterController {
 
-    public static ElementInformation blockInfo = BlockConfig.newElement("Stellar Lifter Controller");
+    public static ElementInformation blockInfo;
 
     public StellarLifterController() {
         blockInfo.setFullName("Stellar Lifter Controller");
@@ -19,8 +19,11 @@ public class StellarLifterController {
         blockInfo.setEnterable(false);
         blockInfo.setProducedInFactory(1);
         blockInfo.setDoor(false);
+        blockInfo.mainCombinationController = true;
         blockInfo.systemBlock = true;
-        blockInfo.controlling.add(NeutroniumSiphonModule.blockInfo.id);
+        blockInfo.controlledBy.add(Blocks.SHIP_CORE.getId());
+        blockInfo.controlling.add(NeutroniumSiphonController.blockInfo.id);
         blockInfo.controlling.add(HeatReflector.blockInfo.id);
+        Blocks.SHIP_CORE.getInfo().controlling.add(blockInfo.getId());
     }
 }

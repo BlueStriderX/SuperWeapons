@@ -1,11 +1,10 @@
 package net.dovtech.superweapons.blocks.systems;
 
-import api.config.BlockConfig;
 import org.schema.game.common.data.element.ElementInformation;
 
 public class NeutroniumSiphonModule {
 
-    public static ElementInformation blockInfo = BlockConfig.newElement("Neutronium Siphon Module");
+    public static ElementInformation blockInfo;
 
     public NeutroniumSiphonModule() {
         blockInfo.setFullName("Neutronium Siphon Module");
@@ -20,6 +19,6 @@ public class NeutroniumSiphonModule {
         blockInfo.setProducedInFactory(1);
         blockInfo.setDoor(false);
         blockInfo.systemBlock = true;
-        blockInfo.controlledBy.add(StellarLifterController.blockInfo.id);
+        blockInfo.controlledBy.add(NeutroniumSiphonController.blockInfo.id);
     }
 }

@@ -7,6 +7,7 @@ public class ${NAME} {
     public static ElementInformation blockInfo;
 
     public ${NAME}() {
+        blockInfo = BlockConfig.newElement("${NAME}");
         blockInfo.setFullName("Display Name");
         blockInfo.setDescription("Description");
         blockInfo.setArmorValue(1);
