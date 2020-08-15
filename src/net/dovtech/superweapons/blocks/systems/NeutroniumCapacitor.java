@@ -19,5 +19,6 @@ public class NeutroniumCapacitor {
         blockInfo.setProducedInFactory(1);
         blockInfo.setDoor(false);
         blockInfo.systemBlock = true;
+        blockInfo.controlledBy.add(StellarLifterController.blockInfo.getId());
     }
 }

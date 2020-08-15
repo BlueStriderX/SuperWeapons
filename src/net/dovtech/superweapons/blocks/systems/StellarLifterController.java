@@ -23,6 +23,7 @@ public class StellarLifterController {
         blockInfo.systemBlock = true;
         blockInfo.controlledBy.add(Blocks.SHIP_CORE.getId());
         blockInfo.controlling.add(NeutroniumSiphonController.blockInfo.id);
+        blockInfo.controlling.add(NeutroniumCapacitor.blockInfo.getId());
         blockInfo.controlling.add(HeatReflector.blockInfo.id);
         Blocks.SHIP_CORE.getInfo().controlling.add(blockInfo.getId());
     }

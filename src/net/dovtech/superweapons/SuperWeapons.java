@@ -3,11 +3,16 @@ package net.dovtech.superweapons;
 import api.DebugFile;
 import api.config.BlockConfig;
 import api.element.block.Blocks;
+import api.listener.Listener;
+import api.listener.events.register.ElementRegisterEvent;
+import api.mod.StarLoader;
 import api.mod.StarMod;
 import api.mod.config.FileConfiguration;
 import net.dovtech.superweapons.blocks.systems.*;
-import net.dovtech.superweapons.systems.neutroniumcapacitor.NeutroniumCapacitorUnit;
-import org.schema.game.common.data.element.ElementInformation;
+import net.dovtech.superweapons.systems.heatreflector.HeatReflectorElementManager;
+import net.dovtech.superweapons.systems.neutroniumcapacitor.NeutroniumCapacitorElementManager;
+import net.dovtech.superweapons.systems.neutroniumsiphon.NeutroniumSiphonElementManager;
+import org.schema.game.common.controller.elements.ManagerModuleCollection;
 import org.schema.game.common.data.element.FactoryResource;
 
 public class SuperWeapons extends StarMod {
@@ -33,8 +38,8 @@ public class SuperWeapons extends StarMod {
     public void onGameStart() {
         this.setModName("SuperWeapons");
         this.setModAuthor("TheDerpGamer");
-        this.setModVersion("0.1.4");
-        this.setModDescription("Adds powerful stellar systems and weapons for your mighty empire.");
+        this.setModVersion("0.1.5");
+        this.setModDescription("Adds powerful new systems for your mighty empire.");
     }
 
     private void initConfig() {
@@ -47,6 +52,7 @@ public class SuperWeapons extends StarMod {
         debugMode = Boolean.parseBoolean(config.getString("debug-mode"));
     }
 
+    @Override
     public void onBlockConfigLoad(BlockConfig config) {
         /* Factory Types:
         0 = NONE
@@ -115,6 +121,16 @@ public class SuperWeapons extends StarMod {
         config.add(HeatReflector.blockInfo);
 
         if(debugMode) DebugFile.log("[DEBUG]: Registered blocks");
+
+
+        StarLoader.registerListener(ElementRegisterEvent.class, new Listener<ElementRegisterEvent>() {
+            @Override
+            public void onEvent(ElementRegisterEvent elementRegisterEvent) {
+                elementRegisterEvent.addModuleCollection(new ManagerModuleCollection(new HeatReflectorElementManager(elementRegisterEvent.getSegmentController()), StellarLifterController.blockInfo.getId(), HeatReflector.blockInfo.getId()));
+                elementRegisterEvent.addModuleCollection(new ManagerModuleCollection(new NeutroniumCapacitorElementManager(elementRegisterEvent.getSegmentController()), StellarLifterController.blockInfo.getId(), NeutroniumCapacitor.blockInfo.getId()));
+                elementRegisterEvent.addModuleCollection(new ManagerModuleCollection(new NeutroniumSiphonElementManager(elementRegisterEvent.getSegmentController()), NeutroniumSiphonController.blockInfo.getId(), NeutroniumSiphonModule.blockInfo.getId()));
+            }
+        });
     }
 
     public static SuperWeapons getInst() {
