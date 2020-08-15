@@ -3,11 +3,13 @@ package net.dovtech.superweapons;
 import api.DebugFile;
 import api.config.BlockConfig;
 import api.element.block.Blocks;
-import api.element.block.FactoryType;
 import api.mod.StarMod;
-import net.dovtech.superweapons.blocks.systems.stellarreactor.StellarReactorController;
-import net.dovtech.superweapons.blocks.weapons.StellarAcceleratorComputer;
-import org.schema.game.common.data.element.ElementInformation;
+import api.mod.config.FileConfiguration;
+import net.dovtech.superweapons.blocks.systems.HeatReflector;
+import net.dovtech.superweapons.blocks.systems.NeutroniumCapacitor;
+import net.dovtech.superweapons.blocks.systems.NeutroniumSiphonModule;
+import net.dovtech.superweapons.blocks.systems.StellarLifterController;
+import net.dovtech.superweapons.systems.neutroniumcapacitor.NeutroniumCapacitorUnit;
 import org.schema.game.common.data.element.FactoryResource;
 
 public class SuperWeapons extends StarMod {
@@ -16,47 +18,92 @@ public class SuperWeapons extends StarMod {
         inst = this;
     }
 
-    @Override
-    public void onEnable() {
-        super.onEnable();
-        this.modName = "SuperWeapons";
-        this.modAuthor = "DovTech";
-        this.modVersion = "0.0.2";
-        this.modDescription = "Adds powerful superweapons for you to annihilate your enemies with.";
-        DebugFile.log("Enabled", this);
+    public boolean debugMode;
+
+    public static void main(String[] args) {
 
     }
 
+    @Override
+    public void onEnable() {
+        super.onEnable();
+        DebugFile.log("Enabled", this);
+        initConfig();
+    }
+
+    @Override
+    public void onGameStart() {
+        this.setModName("SuperWeapons");
+        this.setModAuthor("TheDerpGamer");
+        this.setModVersion("0.1.4");
+        this.setModDescription("Adds powerful stellar systems and weapons for your mighty empire.");
+    }
+
+    private void initConfig() {
+        FileConfiguration config = getConfig("config");
+        config.saveDefault(
+                "debug-mode: false",
+                "neutronium-capacity-per-block: 150.0"
+        );
+
+        debugMode = Boolean.parseBoolean(config.getString("debug-mode"));
+    }
+
     public void onBlockConfigLoad(BlockConfig config) {
+        /* Factory Types:
+        0 = NONE
+        1 = CAPSULE REFINERY
+        2 = MICRO ASSEMBLER
+        3 = BASIC FACTORY
+        4 = STANDARD FACTORY
+        5 = ADVANCED FACTORY
+         */
 
-        //Systems
+        //Initialize Blocks
+        StellarLifterController stellarLifterController = new StellarLifterController();
+        NeutroniumSiphonModule neutroniumSiphonModule = new NeutroniumSiphonModule();
+        NeutroniumCapacitorUnit neutroniumCapacitorUnit = new NeutroniumCapacitorUnit();
+        HeatReflector heatReflector = new HeatReflector();
 
-        //Stellar Reactor Controller
-        StellarReactorController stellarReactorController = new StellarReactorController();
-        ElementInformation stellarReactorControllerInfo = stellarReactorController.getBlockInfo();
-        FactoryResource[] stellarReactorControllerRecipe = {
-                new FactoryResource(5000, Blocks.POWER_REACTOR.getId()),
+        //Add Recipes
+        FactoryResource[] stellarLifterControllerRecipe = {
+                new FactoryResource(5000, Blocks.REACTOR_POWER.getId()),
                 new FactoryResource(5000, Blocks.REACTOR_STABILIZER.getId()),
-                new FactoryResource(10000, Blocks.THRENS_INGOT.getId())
+                new FactoryResource(300, Blocks.POWER_SUPPLY_COMPUTER.getId()),
+                new FactoryResource(300, Blocks.SALVAGE_COMPUTER.getId())
         };
-        BlockConfig.addRecipe(stellarReactorControllerInfo, FactoryType.ADVANCED, 30, stellarReactorControllerRecipe);
-        config.add(stellarReactorControllerInfo);
-
-
-        //Weapons
-
-        //Stellar Accelerator Computer
-        StellarAcceleratorComputer stellarAcceleratorComputer = new StellarAcceleratorComputer();
-        ElementInformation stellarAcceleratorComputerInfo = stellarAcceleratorComputer.getBlockInfo();
-        FactoryResource[] stellarAcceleratorComputerRecipe = {
-                new FactoryResource(5000, Blocks.POWER_REACTOR.getId()),
-                new FactoryResource(3000, Blocks.REACTOR_STABILIZER.getId()),
-                new FactoryResource(500, Blocks.DAMAGE_BEAM_COMPUTER_0.getId()),
-                new FactoryResource(500, Blocks.CANNON_COMPUTER.getId()),
-                new FactoryResource(500, Blocks.MISSILE_COMPUTER.getId()),
-                new FactoryResource(10000, Blocks.THRENS_INGOT.getId()),
+        BlockConfig.addRecipe(StellarLifterController.blockInfo, 5, 50, stellarLifterControllerRecipe);
+        FactoryResource[] neutroniumSiphonRecipe = {
+                new FactoryResource(10, Blocks.REACTOR_STABILIZER.getId()),
+                new FactoryResource(30, Blocks.SALVAGE_MODULE.getId()),
+                new FactoryResource(30, Blocks.POWER_SUPPLY_MODULE.getId()),
+                new FactoryResource(5, Blocks.THRENS_INGOT.getId())
         };
-        BlockConfig.addRecipe(stellarAcceleratorComputerInfo, FactoryType.ADVANCED, 50, stellarAcceleratorComputerRecipe);
-        config.add(stellarAcceleratorComputerInfo);
+        BlockConfig.addRecipe(NeutroniumSiphonModule.blockInfo, 5, 15, neutroniumSiphonRecipe);
+        FactoryResource[] neutroniumCapacitorRecipe = {
+                new FactoryResource(10, Blocks.REACTOR_STABILIZER.getId()),
+                new FactoryResource(10, Blocks.SHIELD_CAPACITOR.getId()),
+                new FactoryResource(5, Blocks.THRENS_INGOT.getId())
+        };
+        BlockConfig.addRecipe(NeutroniumCapacitor.blockInfo, 5, 15, neutroniumCapacitorRecipe);
+        FactoryResource[] heatReflectorRecipe = {
+                new FactoryResource(15, Blocks.REACTOR_STABILIZER.getId()),
+                new FactoryResource(50, Blocks.GLASS.getId()),
+                new FactoryResource(15, Blocks.THRENS_INGOT.getId()),
+                new FactoryResource(5, Blocks.SHIELD_CAPACITOR.getId())
+        };
+        BlockConfig.addRecipe(HeatReflector.blockInfo, 4, 10, heatReflectorRecipe);
+
+        //Register Blocks
+        config.add(StellarLifterController.blockInfo);
+        config.add(NeutroniumSiphonModule.blockInfo);
+        config.add(NeutroniumCapacitor.blockInfo);
+        config.add(HeatReflector.blockInfo);
+
+        if(debugMode) DebugFile.log("[DEBUG]: Registered blocks");
+    }
+
+    public static SuperWeapons getInst() {
+        return inst;
     }
 }
