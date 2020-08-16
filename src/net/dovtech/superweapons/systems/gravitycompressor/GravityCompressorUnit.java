@@ -1,13 +1,13 @@
-package net.dovtech.superweapons.systems.neutroniumsiphon;
+package net.dovtech.superweapons.systems.gravitycompressor;
 
 import org.schema.game.client.data.GameClientState;
 import org.schema.game.client.view.gui.structurecontrol.ControllerManagerGUI;
 import org.schema.game.common.controller.elements.ControlBlockElementCollectionManager;
 import org.schema.game.common.data.element.ElementCollection;
 
-public class NeutroniumSiphonUnit extends ElementCollection<NeutroniumSiphonUnit, NeutroniumSiphonCollectionManager, NeutroniumSiphonElementManager> {
+public class GravityCompressorUnit extends ElementCollection<GravityCompressorUnit, GravityCompressorCollectionManager, GravityCompressorElementManager> {
 
-    public NeutroniumSiphonUnit() {
+    public GravityCompressorUnit() {
     }
 
     public ControllerManagerGUI createUnitGUI(GameClientState clientState, ControlBlockElementCollectionManager<?, ?, ?> controlBlockCollectionManager1, ControlBlockElementCollectionManager<?, ?, ?> controlBlockCollectionManager2) {

@@ -7,7 +7,6 @@ import org.schema.game.client.data.GameClientState;
 import org.schema.game.client.view.gui.structurecontrol.ControllerManagerGUI;
 import org.schema.game.common.controller.elements.ControlBlockElementCollectionManager;
 import org.schema.game.common.data.element.ElementCollection;
-import org.schema.schine.common.language.Lng;
 
 public class HeatReflectorUnit extends ElementCollection<HeatReflectorUnit, HeatReflectorCollectionManager, HeatReflectorElementManager> {
 
@@ -36,7 +35,7 @@ public class HeatReflectorUnit extends ElementCollection<HeatReflectorUnit, Heat
 
     @Override
     public ControllerManagerGUI createUnitGUI(GameClientState gameClientState, ControlBlockElementCollectionManager<?, ?, ?> controlBlockElementCollectionManager, ControlBlockElementCollectionManager<?, ?, ?> controlBlockElementCollectionManager1) {
-        return ((HeatReflectorElementManager)((HeatReflectorCollectionManager)this.elementCollectionManager).getElementManager()).getGUIUnitValues(this, (HeatReflectorCollectionManager)this.elementCollectionManager, controlBlockElementCollectionManager, controlBlockElementCollectionManager1);
+        return this.elementCollectionManager.getElementManager().getGUIUnitValues(this, this.elementCollectionManager, controlBlockElementCollectionManager, controlBlockElementCollectionManager1);
     }
 
     public void calculateExtraDataAfterCreationThreaded(long var1, LongOpenHashSet var3) {
@@ -49,7 +48,7 @@ public class HeatReflectorUnit extends ElementCollection<HeatReflectorUnit, Heat
         this.yDim = this.xDelta > 1 && this.yDelta == 1 && this.zDelta > 1;
         this.zDim = this.xDelta > 1 && this.yDelta > 1 && this.zDelta == 1;
         if (!this.xDim && !this.yDim && !this.zDim) {
-            this.setInvalidReason(Lng.ORG_SCHEMA_GAME_COMMON_CONTROLLER_ELEMENTS_SHIPYARD_SHIPYARDUNIT_0);
+            this.setInvalidReason("Invalid Heat Reflector Array shape");
             LogUtil.sy().fine(this.getSegmentController() + "; " + this + " Invalid Heat Reflector Array shape");
         } else {
             LogUtil.sy().fine(this.getSegmentController() + "; " + this + " Valid Heat Reflector Array shape");

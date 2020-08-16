@@ -11,7 +11,7 @@ import api.mod.config.FileConfiguration;
 import net.dovtech.superweapons.blocks.systems.*;
 import net.dovtech.superweapons.systems.heatreflector.HeatReflectorElementManager;
 import net.dovtech.superweapons.systems.neutroniumcapacitor.NeutroniumCapacitorElementManager;
-import net.dovtech.superweapons.systems.neutroniumsiphon.NeutroniumSiphonElementManager;
+import net.dovtech.superweapons.systems.gravitycompressor.GravityCompressorElementManager;
 import org.schema.game.common.controller.elements.ManagerModuleCollection;
 import org.schema.game.common.data.element.FactoryResource;
 
@@ -64,16 +64,17 @@ public class SuperWeapons extends StarMod {
          */
 
         //Create Blocks
-        StellarLifterController.blockInfo = config.newElement("Stellar Lifter Controller");
-        NeutroniumSiphonController.blockInfo = config.newElement("Neutronium Siphon Controller");
-        NeutroniumSiphonModule.blockInfo = config.newElement("Neutronium Siphon Module");
-        NeutroniumCapacitor.blockInfo = config.newElement("Neutronium Capacitor");
+        //Texture ID Places: { FRONT, BACK, TOP, BOTTOM, LEFT, RIGHT }
+        StellarLifterController.blockInfo = config.newElement("Stellar Lifter Controller", new short[] { 373, 769, 371, 377, 770, 770 });
+        GravityCompressorController.blockInfo = config.newElement("Gravity Compressor Controller", new short[] { 374, 771, 371, 377, 772, 772 });
+        GravityCompressorModule.blockInfo = config.newElement("Gravity Compressor Module", new short[] { 773, 774, 775, 775, 774, 774 });
+        NeutroniumCapacitor.blockInfo = config.newElement("Neutronium Capacitor", new short[] { 776, 776, 776, 776, 776, 776 });
         HeatReflector.blockInfo = config.newElement("Heat Reflector");
 
         //Initialize Blocks
         new StellarLifterController();
-        new NeutroniumSiphonController();
-        new NeutroniumSiphonModule();
+        new GravityCompressorController();
+        new GravityCompressorModule();
         new NeutroniumCapacitor();
         new HeatReflector();
 
@@ -85,20 +86,20 @@ public class SuperWeapons extends StarMod {
                 new FactoryResource(300, Blocks.SALVAGE_COMPUTER.getId())
         };
         BlockConfig.addRecipe(StellarLifterController.blockInfo, 5, 50, stellarLifterControllerRecipe);
-        FactoryResource[] neutroniumSiphonController = {
+        FactoryResource[] gravityCompressorControllerRecipe = {
                 new FactoryResource(100, Blocks.REACTOR_STABILIZER.getId()),
                 new FactoryResource(50, Blocks.SALVAGE_COMPUTER.getId()),
                 new FactoryResource(50, Blocks.POWER_SUPPLY_COMPUTER.getId()),
                 new FactoryResource(30, Blocks.THRENS_INGOT.getId())
         };
-        BlockConfig.addRecipe(NeutroniumSiphonController.blockInfo, 5, 15, neutroniumSiphonController);
-        FactoryResource[] neutroniumSiphonRecipe = {
+        BlockConfig.addRecipe(GravityCompressorController.blockInfo, 5, 15, gravityCompressorControllerRecipe);
+        FactoryResource[] gravityCompressorModuleRecipe = {
                 new FactoryResource(10, Blocks.REACTOR_STABILIZER.getId()),
                 new FactoryResource(30, Blocks.SALVAGE_MODULE.getId()),
                 new FactoryResource(30, Blocks.POWER_SUPPLY_MODULE.getId()),
                 new FactoryResource(5, Blocks.THRENS_INGOT.getId())
         };
-        BlockConfig.addRecipe(NeutroniumSiphonModule.blockInfo, 5, 15, neutroniumSiphonRecipe);
+        BlockConfig.addRecipe(GravityCompressorModule.blockInfo, 5, 15, gravityCompressorModuleRecipe);
         FactoryResource[] neutroniumCapacitorRecipe = {
                 new FactoryResource(10, Blocks.REACTOR_STABILIZER.getId()),
                 new FactoryResource(10, Blocks.SHIELD_CAPACITOR.getId()),
@@ -115,8 +116,8 @@ public class SuperWeapons extends StarMod {
 
         //Register Blocks
         config.add(StellarLifterController.blockInfo);
-        config.add(NeutroniumSiphonController.blockInfo);
-        config.add(NeutroniumSiphonModule.blockInfo);
+        config.add(GravityCompressorController.blockInfo);
+        config.add(GravityCompressorModule.blockInfo);
         config.add(NeutroniumCapacitor.blockInfo);
         config.add(HeatReflector.blockInfo);
 
@@ -128,7 +129,7 @@ public class SuperWeapons extends StarMod {
             public void onEvent(ElementRegisterEvent elementRegisterEvent) {
                 elementRegisterEvent.addModuleCollection(new ManagerModuleCollection(new HeatReflectorElementManager(elementRegisterEvent.getSegmentController()), StellarLifterController.blockInfo.getId(), HeatReflector.blockInfo.getId()));
                 elementRegisterEvent.addModuleCollection(new ManagerModuleCollection(new NeutroniumCapacitorElementManager(elementRegisterEvent.getSegmentController()), StellarLifterController.blockInfo.getId(), NeutroniumCapacitor.blockInfo.getId()));
-                elementRegisterEvent.addModuleCollection(new ManagerModuleCollection(new NeutroniumSiphonElementManager(elementRegisterEvent.getSegmentController()), NeutroniumSiphonController.blockInfo.getId(), NeutroniumSiphonModule.blockInfo.getId()));
+                elementRegisterEvent.addModuleCollection(new ManagerModuleCollection(new GravityCompressorElementManager(elementRegisterEvent.getSegmentController()), GravityCompressorController.blockInfo.getId(), GravityCompressorModule.blockInfo.getId()));
             }
         });
     }

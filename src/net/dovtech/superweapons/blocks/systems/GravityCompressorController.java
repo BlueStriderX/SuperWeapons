@@ -2,13 +2,13 @@ package net.dovtech.superweapons.blocks.systems;
 
 import org.schema.game.common.data.element.ElementInformation;
 
-public class NeutroniumSiphonController {
+public class GravityCompressorController {
 
     public static ElementInformation blockInfo;
 
-    public NeutroniumSiphonController() {
-        blockInfo.setFullName("Neutronium Siphon Controller");
-        blockInfo.setDescription("Controls a Neutronium Siphon System. Link to a Stellar Lifter Controller to manage the system.");
+    public GravityCompressorController() {
+        blockInfo.setFullName("Gravity Compressor Controller");
+        blockInfo.setDescription("Controls a Gravity Compressor System. Link to a Stellar Lifter Controller to manage the system.");
         blockInfo.setArmorValue(1);
         blockInfo.setMaxHitPointsE(1);
         blockInfo.setBuildIconNum(0);
@@ -18,9 +18,11 @@ public class NeutroniumSiphonController {
         blockInfo.setEnterable(false);
         blockInfo.setProducedInFactory(1);
         blockInfo.setDoor(false);
+        blockInfo.setIndividualSides(6);
+        blockInfo.setTextureId(new short[] { 768, 771, 371, 377, 772, 772 });
         blockInfo.supportCombinationController = true;
         blockInfo.systemBlock = true;
         blockInfo.controlledBy.add(StellarLifterController.blockInfo.getId());
-        blockInfo.controlling.add(NeutroniumSiphonModule.blockInfo.getId());
+        blockInfo.controlling.add(GravityCompressorModule.blockInfo.getId());
     }
 }

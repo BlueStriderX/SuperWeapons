@@ -18,6 +18,8 @@ public class NeutroniumCapacitor {
         blockInfo.setEnterable(false);
         blockInfo.setProducedInFactory(1);
         blockInfo.setDoor(false);
+        blockInfo.setIndividualSides(1);
+        blockInfo.setTextureId(new short[] { 776, 776, 776, 776, 776, 776 });
         blockInfo.systemBlock = true;
         blockInfo.controlledBy.add(StellarLifterController.blockInfo.getId());
     }

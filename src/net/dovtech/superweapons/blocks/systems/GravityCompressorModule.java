@@ -2,13 +2,13 @@ package net.dovtech.superweapons.blocks.systems;
 
 import org.schema.game.common.data.element.ElementInformation;
 
-public class NeutroniumSiphonModule {
+public class GravityCompressorModule {
 
     public static ElementInformation blockInfo;
 
-    public NeutroniumSiphonModule() {
-        blockInfo.setFullName("Neutronium Siphon Module");
-        blockInfo.setDescription("Absorbs heat energy from Heat Reflectors and siphons it into connected capacity banks for further processing.");
+    public GravityCompressorModule() {
+        blockInfo.setFullName("Gravity Compressor Module");
+        blockInfo.setDescription("Compresses gravity to pull nearby matter towards it.");
         blockInfo.setArmorValue(1);
         blockInfo.setMaxHitPointsE(1);
         blockInfo.setBuildIconNum(0);
@@ -18,7 +18,9 @@ public class NeutroniumSiphonModule {
         blockInfo.setEnterable(false);
         blockInfo.setProducedInFactory(1);
         blockInfo.setDoor(false);
+        blockInfo.setIndividualSides(6);
+        blockInfo.setTextureId(new short[] { 775, 773, 775, 775, 774, 774 });
         blockInfo.systemBlock = true;
-        blockInfo.controlledBy.add(NeutroniumSiphonController.blockInfo.id);
+        blockInfo.controlledBy.add(GravityCompressorController.blockInfo.id);
     }
 }

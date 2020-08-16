@@ -32,6 +32,7 @@ public class HeatReflectorCollectionManager extends ControlBlockElementCollectio
         return "Heat Reflector Module";
     }
 
+    @Override
     public CollectionShape requiredNeigborsPerBlock() {
         return CollectionShape.LOOP;
     }
